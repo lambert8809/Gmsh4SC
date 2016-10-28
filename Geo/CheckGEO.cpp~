@@ -1,0 +1,199 @@
+#include <string>
+#include "CheckGEO.h"
+#include <istream>
+#include <fstream>
+#include <stdlib.h>
+#include <iostream>
+
+
+double** CheckGEO::Geonodes(std::string fileName){
+  std::ifstream area(fileName.c_str());
+  std::string pointn = "Point";
+	std::string trans = "Translate";
+	std::string dupl = "Duplicata";
+	std::string tempS;
+	double tempI;
+	std::string tempSS;
+	std::string tempsss;
+	std::string readout;
+	int tempII;
+	//double geonodes[1000][4];
+	double** geonodes = new double*[1000];
+	for (int i = 0; i < 1000; i++) geonodes[i] = new double[4];
+	double extension[3];
+	int row = 0, column = 0;
+	//double Xmin=0, Xmax=0, Ymin=0, Ymax=0, Zmin=0, Zmax=0, l1, l2, l3;
+	
+	while (getline(area, readout)) {
+	if (readout.find(pointn) != std::string::npos && readout.find("};") != std::string::npos && readout.find("Duplicata") == std::string::npos)
+		{
+		  // std::cout << readout << std::endl;
+		  column = 0;
+		  readout.erase(0, 6);
+		  size_t poss = readout.find(")");
+		  tempS = readout.substr(0, poss);
+		  tempI = atof(tempS.c_str());
+		  geonodes[row][column] = tempI;
+		  column = column + 1;
+		  
+			size_t pos = readout.find("{");
+			readout.erase(0, pos+1);
+			while (readout.find(",") != std::string::npos)
+			{
+			  size_t pos1 = readout.find(",");
+			  tempS = readout.substr(0, pos1);
+			  tempI = atof(tempS.c_str());
+			  readout.erase(0, pos1 + 1);
+			  geonodes[row][column] = tempI;
+			  column = column + 1;
+			} 
+			row = row + 1;
+			
+			
+		}
+	if 	(readout.find(trans) != std::string::npos)
+		{
+			column = 0;
+			size_t pos = readout.find("e{");
+			size_t pos2 = readout.find("}");
+			tempsss = readout.substr(pos+2, pos2-pos-2);
+			while (tempsss.find(",") != std::string::npos)
+			{
+			  size_t pos1 = tempsss.find(",");
+			  tempSS = tempsss.substr(0, pos1);
+			  tempI = atof(tempSS.c_str());
+			  tempsss.erase(0, pos1 + 1);
+			  extension[column] = tempI;
+			  column = column + 1;
+			} 
+			extension[column] = atof(tempsss.c_str());
+		}	
+	if 	(readout.find(dupl) != std::string::npos && readout.find(pointn) != std::string::npos)
+		{
+			size_t pos = readout.find("Point{");			
+			size_t pos2 = readout.find("};");
+			tempsss = readout.substr(pos+6, pos2-pos-6);
+			while (tempsss.find(",") != std::string::npos)
+			{
+			  size_t pos1 = tempsss.find(",");
+			  tempS = tempsss.substr(0, pos1);
+			  tempII = atof(tempS.c_str());
+			  tempsss.erase(0, pos1 + 1);
+			  geonodes[row][0] = row + 1;
+			  geonodes[row][1] = geonodes[tempII-1][1] + extension[0];
+			  geonodes[row][2] = geonodes[tempII-1][2] + extension[1];
+			  geonodes[row][3] = geonodes[tempII-1][3] + extension[2];
+			  row = row + 1;
+			} 
+			tempII = atof(tempsss.c_str());
+		        geonodes[row][0] = row + 1;
+			geonodes[row][1] = geonodes[tempII-1][1] + extension[0];
+			geonodes[row][2] = geonodes[tempII-1][2] + extension[1];
+			geonodes[row][3] = geonodes[tempII-1][3] + extension[2];
+			row = row + 1;
+		}		
+		
+	}
+	for (int i = 0; i < row; i++) std::cout << geonodes[i][1] << std::endl;
+	area.close();
+	nodenum = row;
+	return geonodes;
+}
+
+
+int** CheckGEO::Geolines(std::string fileName){
+  std::ifstream area(fileName.c_str());
+  //std::ifstream area("new1.geo");
+  std::string readout;
+  std::string temp;
+  int tempB;
+  int** geolines = new int*[100];
+  for (int i = 0; i < 100; i++) geolines[i] = new int[3];
+  int row = 0, column = 0;
+  while (getline(area, readout)) {
+    if (readout.find("Line(") != std::string::npos){
+      column = 0;
+      size_t pos1 = readout.find("(");
+      size_t pos2 = readout.find(")");
+      temp = readout.substr(pos1+1, pos2-pos1-1);
+      //std::cout << temp << std::endl;
+      tempB = atof(temp.c_str());
+      row = tempB - 1;
+      geolines[row][column] = tempB;
+      //std::cout << geolines[row][column] << std::endl;
+      column = column + 1;
+      size_t pos3 = readout.find("{");
+      size_t pos4 = readout.find("}");
+      readout = readout.substr(pos3+1, pos4-pos3-1);
+      while (readout.find(",") != std::string::npos)
+      {
+	size_t pos5 = readout.find(",");
+	temp = readout.substr(0,pos5);
+	tempB = atof(temp.c_str());
+	readout.erase(0, pos5+1);
+	geolines[row][column] = tempB;
+	column = column + 1;
+      }
+      tempB = atof(readout.c_str());
+      geolines[row][column] = tempB;
+      //std::cout << geolines[row][1] << " " << geolines[row][2] << std::endl;
+    }
+  }
+  area.close();
+  //linenum = row;
+
+
+return geolines;
+}
+
+
+double CheckGEO::uni_area(std::string filename){
+  CheckGEO mm;
+  double Xmin=0, Xmax=0, Ymin=0, Ymax=0, Zmin=0, Zmax=0, l1, l2, l3;
+  double** geonodes = mm.Geonodes(filename.c_str()); 
+  int row = mm.nodenum;
+
+   
+  for (int i = 0; i < row; i++){
+		if (geonodes[i][1] < Xmin) Xmin = geonodes[i][1];
+		if (geonodes[i][1] > Xmax) Xmax = geonodes[i][1];	
+		if (geonodes[i][2] < Ymin) Ymin = geonodes[i][2];
+		if (geonodes[i][2] > Ymax) Ymax = geonodes[i][2];
+		if (geonodes[i][3] < Zmin) Zmin = geonodes[i][3];
+		if (geonodes[i][3] > Zmax) Zmax = geonodes[i][3];
+	}
+
+  //for (int i = 0; i < row; i++) std::cout << geonodes[i][1] << std::endl;
+		l1 = Xmax - Xmin;
+		l2 = Ymax - Ymin;
+		l3 = Zmax - Zmin;
+	if (l1 < 0.000001) l1 = 1;
+	if (l2 < 0.000001) l2 = 1;
+	if (l3 < 0.000001) l3 = 1;
+	return l1 * l2 * l3;
+}
+
+bool CheckGEO::period_re(int p1, int p2, std::string name){
+  int MN1, MN2, SN1, SN2;
+  double len1, len2;
+  CheckGEO ck;
+  int** Getlines = ck.Geolines(name.c_str());
+  double** Getnodes = ck.Geonodes(name.c_str());
+  
+  MN1 = Getlines[p1-1][1];
+  MN2 = Getlines[p1-1][2];
+  SN1 = Getlines[p2-1][1];
+  SN2 = Getlines[p2-1][2];
+  std::cout << MN1 << " " << MN2 << std::endl;
+  std::cout << SN1 << " " << SN2 << std::endl;
+  for (int i = 1; i < 4; i++){ // Possible bug for nodal label
+    len1 = Getnodes[MN1-1][i] - Getnodes[MN2-1][i];
+    len2 = Getnodes[SN1-1][i] - Getnodes[SN2-1][i];
+    if (len1 * len2 != 0) break;
+  }
+  std::cout << p1 << " " << p2 << std::endl;
+  std::cout << len1 << " " << len2 << std::endl;
+  std::cout << len1*len2 << std::endl;
+  if (len1 * len2 > 0) return false;
+  if (len1 * len2 < 0) return true;
+}

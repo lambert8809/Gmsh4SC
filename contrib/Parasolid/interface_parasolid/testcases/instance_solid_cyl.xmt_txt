@@ -1,0 +1,43 @@
+**ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz**************************
+**PARASOLID !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~0123456789**************************
+**PART1;
+MC=unknown;
+MC_MODEL=unknown;
+MC_ID=unknown;
+OS=unknown;
+OS_RELEASE=unknown;
+FRU=sdl_parasolid_customer_support;
+APPL=.Net Example Application;
+SITE=unknown;
+USER=unknown;
+FORMAT=text;
+GUISE=transmit;
+KEY=U:\tt1\p_inst_bod_cyl1.x_t;
+FILE=U:\tt1\p_inst_bod_cyl1.x_t;
+DATE=unknown;
+**PART2;
+SCH=SCH_2000118_20000;USFLD_SIZE=0;
+**PART3;
+**END_OF_HEADER*****************************************************************
+T51 : TRANSMIT FILE created by modeller version 200011823 SCH_2000118_20000_1300
+6186 0 12 27 CCCCCCCCCCCCCCCCCCCCCCCA16 index_map_offset0 0 1 dA9 index_map82 0
+ A17 node_id_index_map82 0 A20 schema_embedding_map82 0 Z1 32 2 3 0 0 0 0 1e3 1e
+-8 0 0 0 1 0 1 1 4 5 6 0 7 8 0 0 0 0 0 81 255 2 2 29 9 1 0 0 0 0 10 11 70 11 CI9
+ list_type0 0 1 uI10 notransmit0 0 1 lCCCDCCDI12 finger_index0 0 1 dI12 finger_b
+lock1012 0 CZ3 0 4 T1 0 0 2 20 1 12 12 13 255 4 3 0 1 0 13 0 0 14 0 51 255 5 18
+ 0 15 16 0 0 +.01 .0125 .005 0 0 1 .0025 1 0 0 31 255 6 16 0 8 17 0 0 +.01 .0125
+ .015 0 0 -1 -1 0 0 .0025 19 255 7 1 0 1 14 0 18 V16 255 8 12 0 ?19 0 20 6 0 0 1
+ 17 255 19 0 21 19 19 0 22 8 0 0 +16 20 6 0 ?23 8 0 17 0 0 1 17 23 0 24 23 23 0
+ 25 20 0 0 +31 17 10 0 20 0 6 0 +.01 .0125 .005 0 0 1 1 0 0 .0025 15 255 24 7 0
+ 23 15 0 17 25 0 26 25 25 0 23 20 0 0 -15 26 8 0 25 27 0 14 255 27 9 28 ?15 13 2
+6 4 29 +0 0 15 13 18 81 1 28 31 30 27 0 0 31 32 33 14 15 2 32 ?0 27 21 4 5 +0 0
+ 0 27 18 14 13 15 31 ?27 0 34 4 16 +0 0 27 0 18 50 255 29 11 0 27 0 16 0 +.01 .0
+125 .005 0 0 -1 -1 0 0 13 18 4 0 0 0 0 0 0 7 13 50 16 17 0 13 29 5 0 +.01 .0125
+ .015 0 0 1 1 0 0 81 1 31 30 30 13 0 0 0 28 35 15 34 14 0 22 13 0 17 22 0 34 22
+ 22 0 19 8 0 0 -80 255 1 30 0 36 8001 0 0 0 0 3 5 0 0 0 FFFFTFTFFFFFFF2 83 255 3
+ 35 .5960784 .6666667 .6862745 79 255 15 36 SDL/TYSA_COLOUR81 1 32 32 30 15 0 0
+ 28 0 37 15 21 13 0 19 15 24 83 3 37 .5960784 .6666667 .6862745 83 3 33 .5960784
+ .6666667 .6862745 19 14 5 0 1 0 7 4 S74 4 CI16 index_map_offset0 0 1 dCCZ20 12
+ 2 0 0 2 32 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 80 2 9 38 39 8004 0 0 0 0 3 5 0
+ 0 0 FFTFFFFFFFFFFF2 3 83 1 10 7830.64 84 255 8 11 Kg/Cu M 79 16 39 SDL/TYSA_DEN
+SITY1 0 
